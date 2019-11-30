@@ -2,6 +2,8 @@
 config.ini
 client_secrets.json
 *.session
+*.session-journal
+docker
 
 ### Python template
 # Byte-compiled / optimized / DLL files

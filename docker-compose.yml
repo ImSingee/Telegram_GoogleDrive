@@ -1,0 +1,10 @@
+version: "3"
+services:
+  redis:
+    image: "redis:5-alpine"
+    command: "redis-server --appendonly yes"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker/redis/data:/data
+    restart: always
