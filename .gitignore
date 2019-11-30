@@ -1,6 +1,7 @@
 .idea
 config.ini
 client_secrets.json
+cache
 *.session
 *.session-journal
 docker
