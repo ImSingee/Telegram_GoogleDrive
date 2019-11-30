@@ -51,11 +51,11 @@ async def auth_init_handler(event: NewMessage.Event):
         if is_authenticated(from_user_id):
             await event.reply(
                 '您已经授权，如需重新授权'
-                '请点击以下链接并登录以再次授权，授权完成后发送 `/authenticate ` 后接生成的授权码\n\n' + auth_url
+                '请点击以下链接并登录以再次授权，授权完成后发送生成的授权码\n\n' + auth_url
             )
         else:
             await event.reply(
-                '请点击以下链接并登录授权，授权完成后发送 `/authenticate ` 后接生成的授权码\n\n' + auth_url
+                '请点击以下链接并登录授权，授权完成后发送生成的授权码\n\n' + auth_url
             )
 
         set_status(from_user_id, 'authenticating')
