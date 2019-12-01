@@ -27,7 +27,8 @@ async def to_google_drive(event, file_path, sent_message):
         await sent_message.edit('上传失败。\n\n' + str(e))
         return
 
-    db.set('message-info-google-drive-file-id', f'{event.chat.id}.{sent_message.id}', file['id'])
+    chat = await event.get_chat()
+    db.set('message-info-google-drive-file-id', f'{chat.id}.{sent_message.id}', file['id'])
 
     await sent_message.edit(f"文件[{file['title']}]({file['alternateLink']})上传完成，已经存储至您设置的默认文件夹（未设定则是网盘根目录）。\n\n"
                             f"回复此消息并输入 `/rename ` + 新的文件名以重命名\n"

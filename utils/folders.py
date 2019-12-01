@@ -4,7 +4,7 @@ import db
 def get_default_folders(user_id):
     default_folders = db.get('default-folders', user_id)
     if default_folders:
-        return [get_folder_id(user_id, x) for x in default_folders.split()]
+        return default_folders.split()
     else:
         return []
 
@@ -18,8 +18,7 @@ def set_default_folders(user_id, folders):
 
 
 def get_folder_id(user_id, folder_alias):
-    folder_alias = str(folder_alias).lower()
-    return db.get('folder-alias', f'{user_id}.{folder_alias}', default=folder_alias)
+    return db.get('folder-alias', f'{user_id}.{folder_alias.lower()}', default=folder_alias)
 
 
 def set_folder_alias(user_id, folder_alias, folder_id):

@@ -14,9 +14,9 @@ async def rename_handler(event: NewMessage.Event):
         # TODO - 引导选择文件
         await event.reply('请【回复】相应消息以重命名文件')
         return
+    chat = await event.get_chat()
+    file_id = db.get('message-info-google-drive-file-id', f'{chat.id}.{reply_to_msg_id}')
 
-    file_id = db.get('message-info-google-drive-file-id', f'{event.chat.id}.{reply_to_msg_id}')
-    print(f'{event.chat.id}.{reply_to_msg_id}')
     if not file_id:
         await event.reply('请回复正确的消息以重命名文件')
         return
@@ -57,8 +57,9 @@ async def move_handler(event: NewMessage.Event):
         await event.reply('请【回复】相应消息以移动文件')
         return
 
-    file_id = db.get('message-info-google-drive-file-id', f'{event.chat.id}.{reply_to_msg_id}')
-    print(f'{event.chat.id}.{reply_to_msg_id}')
+    chat = await event.get_chat()
+    file_id = db.get('message-info-google-drive-file-id', f'{chat.id}.{reply_to_msg_id}')
+
     if not file_id:
         await event.reply('请回复正确的消息以移动文件')
         return

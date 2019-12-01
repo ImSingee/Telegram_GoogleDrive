@@ -3,7 +3,7 @@ from telethon.events.newmessage import NewMessage
 
 from utils.status import set_status, clear_status, check_status
 from utils.authenticate import is_authenticated, get_drive
-from utils.folders import set_default_folders
+from utils.folders import set_default_folders, get_folder_id
 
 
 def filter(event: NewMessage.Event):
@@ -45,6 +45,7 @@ async def handler(event: NewMessage.Event):
             return
 
         for folder_id in folder_ids:
+            folder_id = get_folder_id(from_user_id, folder_id)
             try:
                 folder = drive.CreateFile({'id': folder_id})
             except:
