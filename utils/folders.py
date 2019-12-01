@@ -18,12 +18,15 @@ def set_default_folders(user_id, folders):
 
 
 def get_folder_id(user_id, folder_alias):
+    folder_alias = str(folder_alias).lower()
     return db.get('folder-alias', f'{user_id}.{folder_alias}', default=folder_alias)
 
 
 def set_folder_alias(user_id, folder_alias, folder_id):
+    folder_alias = str(folder_alias).lower()
     db.set('folder-alias', f'{user_id}.{folder_alias}', folder_id)
 
 
 def delete_folder_alias(user_id, folder_alias):
+    folder_alias = str(folder_alias).lower()
     db.delete('folder-alias', f'{user_id}.{folder_alias}')

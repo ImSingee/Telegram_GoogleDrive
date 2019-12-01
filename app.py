@@ -6,6 +6,7 @@ from handlers.cancel_handler import register as register_cancel_handler
 from handlers.set_default_folder_handler import register as register_set_default_folder_handler
 from handlers.normal_handler import register as register_normal_handler
 from handlers.file_action_handler import register as register_file_action_handler
+from handlers.folder_alias_handler import register as register_folder_alias_handler
 
 config_parser = ConfigParser()
 config_parser.read('config.ini')
@@ -24,6 +25,7 @@ register_cancel_handler(client)
 register_set_default_folder_handler(client)
 register_normal_handler(client)
 register_file_action_handler(client)
+register_folder_alias_handler(client)
 
 
 @client.on(events.NewMessage)
