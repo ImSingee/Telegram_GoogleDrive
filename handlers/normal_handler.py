@@ -35,7 +35,7 @@ async def handler(event: NewMessage.Event):
 
         downloaded_media = await download_from_telegram(event.client, event.message, sent_message)
         await sent_message.edit('下载完成，即将上传至 Google Drive')
-        await upload_to_google_drive(from_user_id, downloaded_media, sent_message)
+        await upload_to_google_drive(event, downloaded_media, sent_message)
     else:
         await event.reply(
             '纯文本信息不会被保存至 Google Drive'
