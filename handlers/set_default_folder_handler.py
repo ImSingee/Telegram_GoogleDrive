@@ -44,8 +44,8 @@ async def handler(event: NewMessage.Event):
             clear_status(from_user_id)
             return
 
+        folder_ids = [get_folder_id(from_user_id, folder_id) for folder_id in folder_ids]
         for folder_id in folder_ids:
-            folder_id = get_folder_id(from_user_id, folder_id)
             try:
                 folder = drive.CreateFile({'id': folder_id})
             except:

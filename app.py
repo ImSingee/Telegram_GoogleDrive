@@ -15,7 +15,9 @@ api_id = config_parser.get('CORE', 'api_id')
 api_hash = config_parser.get('CORE', 'api_hash')
 bot_token = config_parser.get('CORE', 'bot_token')
 
-if config_parser.getboolean('DEBUG', 'enable', fallback=False):
+DEBUG = config_parser.getboolean('DEBUG', 'enable', fallback=False)
+
+if DEBUG:
     logging.basicConfig(level=logging.DEBUG)
 
 client = TelegramClient('tg_gd', api_id, api_hash)
@@ -28,18 +30,17 @@ register_set_default_folder_handler(client)
 register_file_action_handler(client)
 register_folder_alias_handler(client)
 
+if DEBUG:
+    @client.on(events.NewMessage)
+    async def handler(event):
+        # TODO: [DEBUG] delete this
+        print('[DEBUG] NewMessage:', event)
 
-@client.on(events.NewMessage)
-async def handler(event):
-    # TODO: [DEBUG] delete this
-    print('[DEBUG] NewMessage:', event)
 
-
-@client.on(events.MessageDeleted)
-async def handler(event):
-    # TODO: delete means cancel
-    pass
-
+    @client.on(events.MessageDeleted)
+    async def handler(event):
+        # TODO: delete means cancel
+        pass
 
 if __name__ == '__main__':
     print('Starting...')
