@@ -24,8 +24,8 @@ async def to_google_drive(user_id, file_path, sent_message):
         return
 
     if folders:
-        await sent_message.edit(f"上传完成，文件已经存储至您设置的默认文件夹。\n\n[点此查看此文件]({file['alternateLink']})")
+        await sent_message.edit(f"文件`{file['title']}`上传完成，已经存储至您设置的默认文件夹。\n\n[点此查看此文件]({file['alternateLink']})")
     else:
-        await sent_message.edit(f"上传完成，文件已经存储至您网盘的根目录。\n\n[点此查看此文件]({file['alternateLink']})")
+        await sent_message.edit(f"文件`{file['title']}`上传完成，已经存储至您网盘的根目录。\n\n[点此查看此文件]({file['alternateLink']})")
     # TODO: 删除上传完成后的文件
     # TODO: 重命名

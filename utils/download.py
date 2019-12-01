@@ -2,7 +2,7 @@ import time
 import os
 from configparser import ConfigParser
 from telethon import TelegramClient
-from telethon.tl.types import Message
+from telethon.tl.types import Message, DocumentAttributeFilename
 
 config_parser = ConfigParser()
 config_parser.read('config.ini')
@@ -22,7 +22,13 @@ async def from_telegram(client: TelegramClient, message: Message, sent_message: 
                                     f'{round(received_bytes / 1024 / 1024, 2)}M / {round(total / 1024 / 1024, 2)}M '
                                     f'({round(received_bytes / total * 100, 2)}%)')
 
-    download_to_dir = os.path.join(download_cache_dir, str(message.from_id), str(int(time.time())))
+    download_to_dir = os.path.join(download_cache_dir, time.strftime('%Y%m%d'), str(message.from_id),
+                                   str(int(time.time())))
+    attributes = message.media.document.attributes
+    for attribute in attributes:
+        if type(attribute) is DocumentAttributeFilename:
+            download_to_dir = os.path.join(download_to_dir, attribute.file_name)
+            break
 
     if sent_message:
         downloaded_media = await client.download_media(message, download_to_dir, progress_callback=callback)
