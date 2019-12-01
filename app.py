@@ -20,10 +20,11 @@ if config_parser.getboolean('DEBUG', 'enable', fallback=False):
 
 client = TelegramClient('tg_gd', api_id, api_hash)
 
+register_normal_handler(client)  # must be on top
+
 register_auth_handler(client)
 register_cancel_handler(client)
 register_set_default_folder_handler(client)
-register_normal_handler(client)
 register_file_action_handler(client)
 register_folder_alias_handler(client)
 
