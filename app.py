@@ -44,4 +44,5 @@ if __name__ == '__main__':
     print('Starting...')
     client.start(bot_token=bot_token)
     print('Started.')
-    client.run_until_disconnected()
+    with client:
+        client.run_until_disconnected()
